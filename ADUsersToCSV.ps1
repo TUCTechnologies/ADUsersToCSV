@@ -27,8 +27,10 @@ Write-Host "Searching: " $SearchBase
 # Return a list of users
 $Users = Get-ADUser -Filter * -SearchBase $SearchBase -Properties EmailAddress, OfficePhone, Fax | Where-Object {$_.Enabled -eq $True} | Select-Object SAMAccountName, GivenName, Surname, EmailAddress, officePhone, Fax
 
+# Export data to CSV file
 $Users | Export-Csv $File
 
+# Remove the first line of the file
 Get-Content $File |
     Select -Skip 1 |
     Set-Content "$FileTemp"
