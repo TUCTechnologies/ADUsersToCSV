@@ -23,4 +23,4 @@ $SearchBase = $SearchBase.Substring(0,$SearchBase.Length-1)
 Write-Host "Searching: " $SearchBase
 
 # Return a list of users
-Get-ADUser -Filter * -SearchBase $SearchBase | Where-Object {$_.Enabled -eq $True} | Select-Object SAMAccountName
+Get-ADUser -Filter * -SearchBase $SearchBase -Properties EmailAddress | Where-Object {$_.Enabled -eq $True} | Select-Object SAMAccountName, GivenName, Surname, EmailAddress
