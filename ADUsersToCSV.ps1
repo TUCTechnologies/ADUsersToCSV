@@ -25,7 +25,7 @@ $SearchBase = $SearchBase.Substring(0,$SearchBase.Length-1)
 Write-Host "Searching: " $SearchBase
 
 # Return a list of users
-$Users = Get-ADUser -Filter * -SearchBase $SearchBase -Properties EmailAddress, OfficePhone, Fax | Where-Object {$_.Enabled -eq $True} | Select-Object SAMAccountName, GivenName, Surname, EmailAddress, officePhone, Fax
+$Users = Get-ADUser -Filter * -SearchBase $SearchBase -Properties Office, EmailAddress, Title, OfficePhone | Where-Object {$_.Enabled -eq $True} | Select-Object SAMAccountName, Office, GivenName, Surname, EmailAddress, Title, OfficePhone
 
 # Export data to CSV file
 $Users | Export-Csv $File
